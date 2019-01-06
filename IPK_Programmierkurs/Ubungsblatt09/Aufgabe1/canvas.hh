@@ -5,6 +5,7 @@
 
 #include "point.hh"
 #include "pgm.hh"
+#include "pgm.cc"
 
 // example implementation that combines declaration
 // and definition

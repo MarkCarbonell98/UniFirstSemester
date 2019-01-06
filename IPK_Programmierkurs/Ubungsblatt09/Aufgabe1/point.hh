@@ -6,6 +6,10 @@
 
 class Point
 {
+private:
+
+  double _x;
+  double _y;
 
 public:
 
@@ -16,15 +20,11 @@ public:
   Point(double x, double y);
 
   // Accessors
-
   double x() const;
-
   double y() const;
-
-private:
-
-  double _x;
-  double _y;
+  //setters
+  void setX(const double& newX);
+  void setY(const double& newY);
 
 };
 

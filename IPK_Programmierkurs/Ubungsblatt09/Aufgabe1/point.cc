@@ -19,3 +19,11 @@ double Point::y() const
 {
   return _y;
 }
+
+void Point::setX(const double& newX) {
+  _x = newX;
+}
+
+void Point::setY(const double& newY) {
+  _y = newY;
+}
