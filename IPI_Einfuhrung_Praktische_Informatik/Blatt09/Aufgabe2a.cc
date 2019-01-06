@@ -4,14 +4,18 @@ IntList::IntList() : _first(nullptr), _count(0) {}
 
 IntList::~IntList() {
     if(!this->isEmpty()) {
-        listItem * i = _first;
-        for(int index = 0; index < _count; i = i->_next) {
-            listItem * j = i->_next;
+        listItem * j = new listItem();
+        int counter = 0;
+        for(listItem * i = _first; counter < _count; i = i->_next) {
+            ++counter;
+            j = i;
             delete i;
+            j = j->_next;
             i = j;
-            index++;
         }
+        this->_count = 0;
         delete _first;
+        delete j;
         delete &_count;
     } else {
         delete _first;
@@ -21,7 +25,7 @@ IntList::~IntList() {
 }
 
 int IntList::getCount() {
-    return this->_count;
+    return this->_count == 0;
 }
 
 bool IntList::isEmpty() {
@@ -114,11 +118,11 @@ void IntList::remove(int position) {
     }
 }
 
+//getter for element in position "position"
 int IntList::getElement(int position) {
     if(position > _count || position < 0) {
         throw std::invalid_argument("You can't delete an element that does not exist");
     }
-
     int count = 0;
     for(listItem * i = _first; count != position; i = i->_next) {
         ++count;
@@ -130,6 +134,39 @@ int IntList::getElement(int position) {
     return -1;
 }
 
+//deep copy constructor
+IntList::IntList(const IntList& newList) {
+    _count = newList._count;
+    _first = new listItem();
+    listItem * j = newList._first;
+    int counter = 0;
+    for(listItem * i = _first; counter < _count; i = i->_next) {
+        ++counter;
+        i->_next = j;
+        j = j->_next;
+    }
+}
+
+//equals operator 
+IntList& IntList::operator=(const IntList& newList) {
+    if(&newList != this) {
+        if(_count != newList._count && _first != newList._first) {
+            delete _first;
+            delete &_count;
+            _first = newList._first;
+            _count = newList._count;
+            int counter = 0;
+            listItem * j = newList._first;
+            for(listItem * i = _first; counter < _count; i = i->_next) {
+                ++counter;
+                i->_next = j;
+                j = j->_next;
+            }
+        }
+    }
+    return *this;
+}
+
 
 
 int main() {
@@ -139,7 +176,22 @@ int main() {
     list->insert(3,3);
     list->print();
     list->remove(2);
+    printf("removed Item 2");
+    list->print();
+    
+    printf("\n %d %d %d \n", list->getCount(), list->isEmpty(), list->getElement(2));
+
+    IntList* theNewList = new IntList();
+    theNewList->insert(5,5);
+    theNewList->print();
+    list->print();
+    list = theNewList;
     list->print();
 
-    printf("\n %d %d %d \n", list->getCount(), list->isEmpty(), list->getElement(2));
+    IntList* lastCopy(list);
+    lastCopy->print();
+
+    lastCopy->~IntList();
+    std::cout << lastCopy->isEmpty() << std::endl;
+
 }

@@ -10,6 +10,10 @@ class IntList {
 
         ~IntList();
 
+        IntList& operator=(const IntList&);
+
+        IntList(const IntList&);
+
         int getCount();
 
         bool isEmpty();
@@ -21,6 +25,7 @@ class IntList {
         void remove(int position);
 
         int getElement(int position);
+
 
     private:
         struct listItem {
