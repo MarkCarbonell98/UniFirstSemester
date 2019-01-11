@@ -31,7 +31,6 @@ class Point {
             double result;
             for(auto number : _point)
                 result += pow(number,2);
-
             return std::abs(std::sqrt(result));
         }
 

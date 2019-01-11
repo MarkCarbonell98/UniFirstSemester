@@ -19,6 +19,8 @@ void print_statistics(const T& t)
 }
 
 
+
+
 int main()
 {
   auto vec = uniform_distribution(0,10000,0.0,1.0);

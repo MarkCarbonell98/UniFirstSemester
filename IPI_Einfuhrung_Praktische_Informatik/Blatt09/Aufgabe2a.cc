@@ -193,5 +193,4 @@ int main() {
 
     lastCopy->~IntList();
     std::cout << lastCopy->isEmpty() << std::endl;
-
 }

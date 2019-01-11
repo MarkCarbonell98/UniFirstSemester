@@ -25,8 +25,7 @@ class IntList {
         void remove(int position);
 
         int getElement(int position);
-
-
+        
     private:
         struct listItem {
             listItem* _next;
