@@ -147,7 +147,7 @@ IntList::IntList(const IntList& newList) {
     }
 }
 
-//equals operator 
+//equals operator [] () 
 IntList& IntList::operator=(const IntList& newList) {
     if(&newList != this) {
         if(_count != newList._count && _first != newList._first) {
@@ -193,4 +193,23 @@ int main() {
 
     lastCopy->~IntList();
     std::cout << lastCopy->isEmpty() << std::endl;
+    // (*lastCopy).isEmpty();
+    // [ ] <==> *
+    int a = 5;
+    int * b = &a;
+    
+    *b = 10; // a = 10;
+    int ** c = &b;
+    **c = 20; // a,b,c,d = 20;
+    int *** d = &c;
+
+    std::cout << &a << b << *c << **d << std::endl;
+
+    int * feld = new int[10];
+    feld++; //=feld[1]
+    std:: cout << feld << *feld << feld[0]<< std::endl;
+    // feld[1][9] = 12;
+
+    // std::cout << feld[0][1] << feld[1][9] << *(feld[1]+9) << std::endl;
+    return 0;
 }
