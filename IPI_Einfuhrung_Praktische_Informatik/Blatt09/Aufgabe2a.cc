@@ -21,7 +21,6 @@ IntList::~IntList() {
         delete _first;
         delete &_count;
     }
-
 }
 
 int IntList::getCount() {

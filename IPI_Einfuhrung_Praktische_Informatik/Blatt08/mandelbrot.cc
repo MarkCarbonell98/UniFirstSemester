@@ -124,8 +124,6 @@ void init_grid(Image &x_coords, Image &y_coords, float x_min, float x_max, float
     print("\n");
   }
 
-  std::cout << "Marcos es marico";
-
   float y_coords_frac = y_max/(y_coords.H - 1.0);
   for(int i = 0; i < y_coords.H; i++) {
     for(int j = 0; j <= y_coords.W; j++) {

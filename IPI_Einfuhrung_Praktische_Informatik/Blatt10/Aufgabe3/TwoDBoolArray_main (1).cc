@@ -1,4 +1,4 @@
-#include "TwoDBoolArray.cc"
+#include "TwoDBoolArray.hh"
 #include <iostream>
 
 using namespace std;
@@ -39,9 +39,9 @@ int main()
         
   TwoDBoolArray matrix2 = TwoDBoolArray();
   cout << "Operator>> von matrix2:" << endl;
-  // cin >> matrix2;
+  cin >> matrix2;
   cout << "Operator<< von matrix2:" << endl;
-  // cout << matrix2;
+  cout << matrix2;
 
   return 0;
 }

@@ -60,7 +60,7 @@ void push(BaumElement* element)
 {
   stack.value[stack.top] = element;
   stack.top++;
-}
+}i
 
 BaumElement* pop()
 {

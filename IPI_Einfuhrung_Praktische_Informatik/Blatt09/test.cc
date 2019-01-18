@@ -26,8 +26,10 @@ int main() {
 
     printf("\n \n");
     int ** a, *b;
+    std::cout << b;
     int c = 4, *d = &(c);
     a = &d;
-    b = *a;
-    std::cout << *b << std::endl;
+    b = *a; // 
+    // *b = *a;
+    std::cout << b << std::endl;
 }
