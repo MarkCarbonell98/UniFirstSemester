@@ -1,13 +1,13 @@
 #include "vector.hh"
 
-Vector::Vector(T2 length) : _data(length), _length(length) {}
+int main(int argc, char const *argv[])
+{
+    std::vector<int> test1 = {1,2,3};
+    std::vector<int> test2 = {4,5,6};
+    Vector<int, int> a(test1, test1.size()), b(test2, test2.size());
+    a.print();
+    b.print();
 
-Vector::Vector(std::vector<T1> input, T2 length) : _length(length) {
-    for(std::size_t i = 0; i < _data.size(); i++) {
-        _data[i] = input[i];
-    }
-}
 
-Vector& Vector::add(const Vector a) const {
-    
+    return 0;
 }
