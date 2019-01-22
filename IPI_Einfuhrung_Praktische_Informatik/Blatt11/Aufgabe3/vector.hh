@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <iterator>
+
 template<typename T1, typename T2>
 class Vector{
     private:
@@ -12,7 +13,7 @@ class Vector{
     public:
         Vector(std::vector<T1> input, T2 length) : _length(length) {
             for(std::size_t i = 0; i < _data.size(); i++) {
-                _data[i].push_back(input[i]);
+                _data.push_back(input[i]);
             }
         }
 

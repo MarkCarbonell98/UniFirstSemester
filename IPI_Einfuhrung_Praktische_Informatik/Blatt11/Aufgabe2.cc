@@ -25,10 +25,36 @@ class C : public B {
 };
 
 int main() {
-    A a; B b; C c; A* pa=&b; B* pb=&c; float x = 1.2;
-    pa->a(); pa->va(); pa->a(1); pa->c(); pa->b(); pa->vb(); pa->a(x);
-    pb->a(); pb->va(); pb->a(1); pb->c(); pb->b(); pb->vb(); pb->a(x);
+    // A a; // Fehler 1, eine abstrakte Klasse darf keine Objekte erzeugen
+    B b;
+    C c; 
+    A* pa=&b; B* pb=&c; 
+    float x = 1.2;
+    pa->a(); // wurde von A aufgerufen und implementiert
+    pa->va();  // wurde von A aufgerufen und implementiert
+    pa->a(1);  // wurde von A aufgerufen und implementiert
+    // pa->c();  // Fehler 2, c ist private in A::c()
+    // pa->b(); // Fehler 3, b ist A::b() nicht definiert
+    // pa->vb(); // Fehler 4, vb ist in A::vb() nicht definiert
+    pa->a(x); //wurde von A aufgerufen und implementiert
+    // pb->a(); //Fehler 5, a() must ein argument bekommen. (int)
+    pb->va(); // wurde von B aufgerufen und implementiert
+    pb->a(1); // wurde von B aufgerufen und implementiert
+    // pb->c();  //Fehler 6 c() ist private in A::c()
+    pb->b();  //wurde von B aufgerufen und implementiert
+    pb->vb();  //wurde von B aufgerufen und implementiert
+    pb->a(x); //wurde von B aufgerufen und implementiert
     pa = &c;
-    pa->a(); pa->va(); pa->a(1); pa->c(); pa->b(); pa->vb(); pa->a(x);
+    pa->a(); // wurde von A aufgerufen und implementiert
+    pa->va(); // wurde von A aufgerufen und implementiert
+    pa->a(1); // wurde von A aufgerufen und implementiert
+    // pa->c(); //Fehler 7, c ist in A::c() private
+    // pa->b(); // Fehler 8, b() ist in A::b() nicht definiert 
+    // pa->vb(); // Fehler 9, vb() hat kein member in A::vb
+    pa->a(x); // Fehler 10, da x von typ float ist, aber a nimmt nur ints als input
 }
+
+// Vorlesung Abstrakte klassen 10 (Klausur)
+// einige Definitionen
+// codezeilen hinzufugen
 

@@ -29,14 +29,14 @@ class C : public B {
 
 void B::Y() {
     bq = bp;
-    aq = ap;
+    aq = ap; //Fehler 1. aq ist ein Privat member von A
     bY();
 }
 
-void C::cz() {
+void C::cz() { //Fehler 2. Die methode heißt sich Cz(), nicht cz()
     ap = 1;
     bp = 2;
-    cq = 3;
+    cq = 3; //Alles was in diese Funktion drin steht ist nicht definiert.
     X();
     Y();
     aX();
@@ -46,37 +46,11 @@ int main() {
     A a; B b; C c;
 
     a.X();
-    b.bY();
+    b.bY(); // Fehler 3. bY() ist eine Private Funktion von B 
     c.cp = 4;
     c.bp = 1;
     c.ap = 2;
-    c.aq = 5;
+    c.aq = 5; // Fehler 4. aq ist ein Private member von A.
     b.ap = c.ap;
     return 0;
-    /*
-        Aufgabe1.cc: In member function 'void B::Y()':
-Aufgabe1.cc:32:5: error: 'int A::aq' is private within this context
-     aq = ap;
-     ^~
-Aufgabe1.cc:8:13: note: declared private here
-         int aq;
-             ^~
-Aufgabe1.cc: At global scope:
-Aufgabe1.cc:36:12: error: no 'void C::cz()' member function declared in class 'C'
- void C::cz() {
-            ^
-Aufgabe1.cc: In function 'int main()':
-Aufgabe1.cc:49:10: error: 'void B::bY()' is private within this context
-     b.bY();
-          ^
-Aufgabe1.cc:18:14: note: declared private here
-         void bY();
-              ^~
-Aufgabe1.cc:53:7: error: 'int A::aq' is private within this context
-     c.aq = 5;
-       ^~
-Aufgabe1.cc:8:13: note: declared private here
-         int aq;
-             ^~
-    */
 }
