@@ -3,36 +3,54 @@
 
 #include <vector>
 #include <iostream>
-#include <iterator>
+#include <list>
+#include <algorithm>
 
 template<typename T1, typename T2>
 class Vector{
     private:
-        std::vector<T1> _data;
+        std::vector<typename T1::value_type> _data;
         T2 _length;
     public:
-        Vector(std::vector<T1> input, T2 length) : _length(length) {
-            for(std::size_t i = 0; i < _data.size(); i++) {
-                _data.push_back(input[i]);
+
+        Vector() {
+            _data = {};
+            _length = 0;
+        }
+
+        Vector(const Vector &input) {
+            _data = input._data;
+            _length = input._length;
+        }
+
+        Vector& operator=(const Vector input) {
+            _data = input._data;
+            _length = input._length;
+        }
+
+        Vector(T1 input, T2 length) : _length(length) {
+            for(auto i : input) {
+                _data.push_back(i);
             }
         }
 
-        Vector& add(const Vector input) const {
-            for(std::size_t i = 0; i < _data.size(); i++) {
-                _data[i] += input[i];
+        Vector& add(Vector input) {
+            for(T2 i = 0; i < _length; i++) {
+                _data[i] += input._data[i];
             }
             return (*this);
         }   
 
-        Vector& scalarMultiplied(const double a) const {
-            for(std::size_t i = 0; i < _data.size(); i++) {
-                _data[i] += a;
+        Vector& scalarMultiplied(const double a) {
+            for(T2 i = 0; i < _length; i++) {
+                _data[i] *= a;
             }
             return (*this);
         }
-        T1& maximum() const {
-            T1 max;
-            for(std::size_t i = 1; i < _data.size(); i++) {
+
+        typename T1::value_type maximum() const {
+            typename T1::value_type max;
+            for(T2 i = 1; i < _length; i++) {
                 if(_data[i -1] > _data[i]) {
                     max = _data[i-1];
                 } else {
@@ -42,16 +60,24 @@ class Vector{
             return max;
         }
 
-        T1& operator[](int i) {
+        typename T1::value_type& operator[](int i) {
             return _data[i];
         };
 
         void print() const {
             std::cout << "(";
-            for(std::size_t i = 0; i < _data.size(); i++) {
+            for(T2 i = 0; i < _length; i++) {
                 std::cout << _data[i] << ", ";
             }
             std::cout << ") " << std::endl;
+        }
+
+        typename T1::value_type begin() {
+            return _data[0];
+        }
+
+        typename T1::value_type end() {
+            return _data[_length-1];
         }
 };
 #endif// VECTOR_HH
