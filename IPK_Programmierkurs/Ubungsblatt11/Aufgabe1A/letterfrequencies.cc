@@ -12,7 +12,7 @@ std::map<char,int> get_frequencies()
       // read in character
       std::cin >> c;
       // abort if input closed
-      if (not std::cin)
+      if (!std::cin)
         break;
 
       if (std::isalpha(c))
@@ -41,4 +41,5 @@ void print_frequencies(const std::map<char,int>& frequencies)
 int main()
 {
   print_frequencies(get_frequencies());
+  //ctrl z to close input
 }

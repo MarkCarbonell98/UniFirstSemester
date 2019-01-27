@@ -7,7 +7,7 @@
     },
     "tasks": [
         {
-            "label": "build c++",
+            "label": "Build C++ File",
             "type": "shell",
             "command": "g++",
             "args": [
@@ -45,9 +45,59 @@
                 "isDefault": true
             },
             "dependsOn": [
-                "build c++"
+                "Build C++ File"
             ],
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "Cmake Compile Project",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-G",
+                "'Unix Makefiles'",
+                ".."
+            ],
+            "options": {
+                "cwd": "${fileDirname}/build"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "group": "build"
+        },
+        {
+            "label": "Cmake Build C++ Project",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "."
+            ],
+            "options": {
+                "cwd": "${fileDirname}/build"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Cmake Compile Project"
+            ],
+            "problemMatcher": []
+        },
     ]
 }

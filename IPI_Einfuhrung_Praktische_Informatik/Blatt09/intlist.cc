@@ -1,6 +1,6 @@
 // Ein Listenelement
 struct IntListElem {
-  IntListElem* next;  // Zeiger auf nächstes Element
+  IntListElem* next;  // Zeiger auf nï¿½chstes Element
   int value;          // Daten zu diesem Element  
 } ;
 
