@@ -1,7 +1,5 @@
-#ifndef AUFGABE1_HH
-#define AUFGABE1_HH
-
-
+#ifndef FREQUENCIES_HH
+#define FREQUENCIES_HH
 #include <iostream>
 #include <cctype>
 #include <iterator>
@@ -14,122 +12,14 @@
 #include <sstream>
 #include <unordered_map>
 
-/**
- * Source of letters from a stream.
- *
- * Use it like this:
- *
- * auto source = streamLetterSource(std::cin);
- *
- * while (true)
- * {
- *   auto data = source.next();
- *   if (not data.second)
- *     break;
- *   // work with letter in data.first
- * }
- */
-template <typename Stream>
-class StreamLetterSource
-{
+template<typename Map>
+class Frequencies {
+    public:
+        typedef typename Map::key_type the_keys;
 
-  public:
-    // The type of data returned from next
-    // Item::second tells you whether the data is valid,
-    // Item::first contains the actual data if it is valid
-    using Item = std::pair<char, bool>;
+        Frequencies()
 
-    StreamLetterSource(Stream &stream)
-        : _stream(stream)
-    {
-    }
-
-    // Get the next data item from the source.
-    Item next()
-    {
-        unsigned char c;
-        _stream >> c;
-        return Item(c, bool(_stream));
-    }
-
-  private:
-    Stream &_stream;
-};
-
-/**
- * Construct a StreamLetterSource for a given stream
- */
-template <typename Stream>
-StreamLetterSource<Stream> streamLetterSource(Stream &stream)
-{
-    return {{stream}};
-}
-
-/**
- * Source of words from a stream.
- *
- * Use it like this:
- *
- * auto source = streamWordSource(std::cin);
- *
- * while (true)
- * {
- *   auto data = source.next();
- *   if (not data.second)
- *     break;
- *   // work with word in data.first
- * }
- */
-template <typename Stream>
-class StreamWordSource
-{
-
-  public:
-    // The type of data returned from next
-    // Item::second tells you whether the data is valid,
-    // Item::first contains the actual data if it is valid
-    using Item = std::pair<std::string, bool>;
-
-    StreamWordSource(Stream &stream)
-        : _stream(stream)
-    {
-    }
-
-    // Get the next data item from the source.
-    Item next()
-    {
-        std::string s;
-        _stream >> s;
-        if (not bool(_stream))
-            return Item("", false);
-
-        std::string out;
-        std::copy_if(begin(s), end(s), back_inserter(out), [](auto c) {
-            return std::isalpha(c);
-        });
-        std::transform(begin(out), end(out), begin(out), [](auto c) {
-            return std::tolower(c);
-        });
-        return Item(std::move(out), true);
-    }
-
-  private:
-    Stream &_stream;
-};
-
-/**
- * Construct a StreamLetterSource for a givn stream
- */
-template <typename Stream>
-StreamWordSource<Stream> streamWordSource(Stream &stream)
-{
-    return {{stream}};
-}
-
-template <typename Map>
-class LetterFrequencies
-{
-  public:
+        public:
     LetterFrequencies(Map newMap) : _map(newMap) {}
     
     template <typename T1>
@@ -237,11 +127,32 @@ class LetterFrequencies
         for(auto item : _map) 
             std::cout << item.first << " " <<  item.second <<  std::endl; 
     }
-
-
-
+        
     private:
-    Map _map;
+        typename Map::key_type _input;
+        Filter _filter;
+
 };
 
-#endif //aufgabe1_hh
+template<typename Data>
+class Filter {
+    public:
+        Filter();
+
+        Data transform(const Data& data) {
+            Data transformedData = data;
+            if(!this->remove(data)) {
+                std::toupper(data.first);
+            }
+            return data;
+        };
+
+        bool remove(const Data& data) {
+            if(((sizeof data.first) != 24) && ((sizeof data.first) != 1)) {
+                return false;
+            }
+            return true;
+        };
+};
+
+#endif // FREQUENCIES_HH
