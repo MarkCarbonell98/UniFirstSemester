@@ -9,8 +9,6 @@ int apply(F f, int arg) {
 
 int main(int argc, char *argv[])
 {
-    for(int i = 1; i < argc; i++) {
-        print(apply([](int n){return n+5;}, readarg_int(argc, &argv[i], 1))); // 1 2 3 4 5 => 6 7 8 9 10
-    }
+    print(apply([](int n){return n+5;}, readarg_int(argc, argv, 1))); // 1 2 3 4 5 => 6 7 8 9 10
     return 0;
 }

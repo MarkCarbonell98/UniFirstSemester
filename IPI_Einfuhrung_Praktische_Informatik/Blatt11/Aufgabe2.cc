@@ -17,10 +17,10 @@ class B : public A {
 };
 
 class C : public B {
-    public:
-        virtual void c();
-        void a(float);
-        virtual void a();
+    public:                    //^ 
+        virtual void c();      //| compiler search order     
+        void a(float);         //|
+        virtual void a();      //|
         virtual void va();
 };
 
@@ -31,8 +31,8 @@ int main() {
     A* pa=&b; B* pb=&c; 
     float x = 1.2;
     pa->a(); // wurde von A aufgerufen und implementiert
-    pa->va();  // wurde von A aufgerufen und implementiert
-    pa->a(1);  // wurde von A aufgerufen und implementiert
+    pa->va();  // wurde von B aufgerufen und implementiert
+    pa->a(1);  // wurde von B aufgerufen und implementiert
     // pa->c();  // Fehler 2, c ist private in A::c()
     // pa->b(); // Fehler 3, b ist A::b() nicht definiert
     // pa->vb(); // Fehler 4, vb ist in A::vb() nicht definiert
@@ -51,6 +51,7 @@ int main() {
     // pa->c(); //Fehler 7, c ist in A::c() private
     // pa->b(); // Fehler 8, b() ist in A::b() nicht definiert 
     // pa->vb(); // Fehler 9, vb() hat kein member in A::vb
+
     pa->a(x); // Fehler 10, da x von typ float ist, aber a nimmt nur ints als input
 }
 

@@ -2,13 +2,13 @@
 
 int main(int argc, char const *argv[])
 {
-    const int n = 50000000;
+    const int n = 5000;
     bool prim[n];
 
     prim[0] = false;
     prim[1] = false;
     for(int i = 2; i < n; i++) 
-        prim[i] = true;    
+        prim[i] = true;   
 
     for(int i = 2; i <=sqrt((double) n); i++)
         if(prim[i])
