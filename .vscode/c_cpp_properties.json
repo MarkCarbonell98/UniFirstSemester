@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceRoot}"
+                "${default}",
+                "C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/SDL2"
             ],
             "defines": [
                 "_DEBUG",
@@ -13,9 +14,8 @@
             "cStandard": "${default}",
             "intelliSenseMode": "msvc-x64",
             "browse": {
-                "path":[
-                    "${workspaceRoot}",
-                    "C:\\MinGW\\lib\\gcc\\mingw32\\6.3.0\\include\\c++"
+                "path": [
+                    "${default}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
